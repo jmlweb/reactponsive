@@ -1,0 +1,45 @@
+{
+  "name": "reactponsive",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "dist/types.tsx",
+  "author": "José Manuel Lucas <josemanuel@jmlweb.es>",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "NODE_ENV=production rollup -c",
+    "watch": "rollup -cw",
+    "prepare": "npm run build",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/react": "^16.8.10",
+    "@types/react-dom": "^16.8.3",
+    "copyfiles": "^2.1.0",
+    "jest": "^24.5.0",
+    "json": "^9.0.6",
+    "npm-run-all": "^4.1.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.7.4",
+    "rollup-plugin-analyzer": "^3.0.0",
+    "rollup-plugin-cleanup": "^3.1.1",
+    "rollup-plugin-progress": "^1.1.1",
+    "rollup-plugin-size-snapshot": "^0.8.0",
+    "rollup-plugin-typescript2": "^0.20.1",
+    "ts-jest": "^24.0.0",
+    "tslib": "^1.9.3",
+    "tslint": "^5.14.0",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.3.4000"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6"
+  },
+  "dependencies": {}
+}

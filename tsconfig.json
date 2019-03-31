@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "declaration": true,
+    "declarationDir": "dist",
+    "diagnostics": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "jsx": "react",
+    "lib": ["es2017", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "compiled",
+    "sourceMap": true,
+    "target": "es2017"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
