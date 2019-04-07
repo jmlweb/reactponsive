@@ -1,3 +1,4 @@
+export { default as AliasProvider } from './AliasProvider';
 export { default as ReactPonsive } from './ReactPonsive';
 export { default as ReactPonsiveToggle } from './ReactPonsiveToggle';
 export { default as ReactPonsiveValue } from './ReactPonsiveValue';

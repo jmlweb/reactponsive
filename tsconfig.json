@@ -8,12 +8,12 @@
     "importHelpers": true,
     "jsx": "react",
     "lib": ["es2017", "dom"],
-    "module": "esnext",
+    "module": "es6",
     "moduleResolution": "node",
-    "noImplicitAny": true,
     "outDir": "compiled",
     "sourceMap": true,
-    "target": "es2017"
+    "target": "es2017",
+    "strict": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

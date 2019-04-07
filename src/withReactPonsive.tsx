@@ -1,14 +1,16 @@
 import * as React from 'react';
 
 import ReactPonsive from './ReactPonsive';
-import { ChildrenProps, Mqs } from './types';
-import { extractDisplayName } from './_lib';
+import { Mqs, PropsMapper } from './types';
+import { extractDisplayName } from './utils';
 
-const withReactPonsive = (mqs: Mqs) => <OriginalProps extends {}>(
-  ExternalComponent: React.ComponentType<OriginalProps & ChildrenProps>,
-): React.ComponentClass<OriginalProps> => {
-  if (!mqs || !Array.isArray(mqs)) {
-    throw 'You must supply an array of media query strings';
+const withReactPonsive = (mqs: Mqs, propsMapper?: PropsMapper) => <
+  OriginalProps extends {}
+>(
+  ExternalComponent: React.ComponentType<OriginalProps>,
+): React.ComponentClass<OriginalProps & {}> => {
+  if (!mqs) {
+    throw 'You need to provide an array of media query strings';
   }
   const componentDisplayName = extractDisplayName(ExternalComponent);
 
@@ -19,6 +21,7 @@ const withReactPonsive = (mqs: Mqs) => <OriginalProps extends {}>(
       return (
         <ReactPonsive
           mqs={mqs}
+          propsMapper={propsMapper}
           component={childrenProps => (
             <ExternalComponent {...this.props} {...childrenProps} />
           )}

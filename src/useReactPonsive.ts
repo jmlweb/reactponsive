@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
 import { Mqs } from './types';
-import { buildMqObj, getReactPonsiveProps, updateMqsMatches } from './_lib';
+import Context from './Context';
+import { buildMqObj, buildReactPonsiveProps, updateMqsMatches } from './utils';
 
 const useReactPonsive = (mqsStringArr: Mqs) => {
-  const initialMqs = mqsStringArr.map(buildMqObj);
+  const alias = useContext(Context);
+  const buildMqObjWithAlias = buildMqObj(alias);
+  const initialMqs = mqsStringArr.map(buildMqObjWithAlias);
   const [mqs, setMqs] = useState(initialMqs);
+  const updateMatches = (e: MediaQueryListEvent) => {
+    const newMqs = updateMqsMatches(mqs, e);
+    setMqs(newMqs);
+  };
   useEffect(() => {
-    const updateMatches = (e: MediaQueryListEvent) => {
-      const newMqs = updateMqsMatches(mqs, e);
-      setMqs(newMqs);
-    }
-    mqs.forEach(mqObj => {
-      mqObj.mq.addListener(updateMatches);
+    const mqEvents = mqs.map(({ value }) => {
+      const mq = window.matchMedia(value);
+      mq.addListener(updateMatches);
+      return mq;
     });
-
     return () => {
-      mqs.forEach(mqObj => {
-        mqObj.mq.removeListener(updateMatches);
-      });
+      mqEvents.forEach(mq => mq.removeListener(updateMatches));
     };
-  }, [mqs, setMqs]);
-
-  const props = getReactPonsiveProps(mqs);
-  return props;
-}
+  }, [mqsStringArr]);
+  return buildReactPonsiveProps(mqs);
+};
 
 export default useReactPonsive;

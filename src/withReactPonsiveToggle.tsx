@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Mqs } from './types';
-import { castArray, extractDisplayName } from './_lib';
+import { castArray, extractDisplayName, pickPasses } from './utils';
 import ReactPonsive from './ReactPonsive';
 
 const withReactPonsiveToggle = (mq: string | Mqs, strict: Boolean = false) => <
@@ -10,7 +10,7 @@ const withReactPonsiveToggle = (mq: string | Mqs, strict: Boolean = false) => <
   ExternalComponent: React.ComponentType<OriginalProps>,
 ): React.ComponentClass<OriginalProps> => {
   if (!mq) {
-    throw 'You must supply a media query string or an array of media query strings';
+    throw 'You need to provide a media query string or an array of media query strings';
   }
   const mqs = castArray(mq);
 
@@ -23,9 +23,9 @@ const withReactPonsiveToggle = (mq: string | Mqs, strict: Boolean = false) => <
       return (
         <ReactPonsive
           mqs={mqs}
-          component={({ matchesArr }) =>
-            !matchesArr.length ||
-            (strict && matchesArr.length < mqs.length) ? null : (
+          propsMapper={pickPasses}
+          component={({ passes }) =>
+            !passes.length || (strict && passes.length < mqs.length) ? null : (
               <ExternalComponent {...this.props} />
             )
           }

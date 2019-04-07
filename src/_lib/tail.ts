@@ -1,3 +1,0 @@
-const tail = <T>(arr: T[]): T => arr.length ? arr[arr.length - 1] : undefined;
-
-export default tail;
