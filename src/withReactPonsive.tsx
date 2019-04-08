@@ -9,9 +9,6 @@ const withReactPonsive = (mqs: Mqs, propsMapper?: PropsMapper) => <
 >(
   ExternalComponent: React.ComponentType<OriginalProps>,
 ): React.ComponentClass<OriginalProps & {}> => {
-  if (!mqs) {
-    throw 'You need to provide an array of media query strings';
-  }
   const componentDisplayName = extractDisplayName(ExternalComponent);
 
   class ReactPonsiveHOC extends React.Component<OriginalProps> {

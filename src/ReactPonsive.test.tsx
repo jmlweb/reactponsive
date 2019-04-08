@@ -5,24 +5,9 @@ import 'jest-dom/extend-expect';
 import AliasProvider from './AliasProvider';
 import ReactPonsive from './ReactPonsive';
 import { ChildrenProps, Mqs } from './types';
+import { generateMatchMediaMock } from './testUtils';
 
-const isMatching = (query: string) =>
-  query === '(min-width: 400px)' || query === '(min-width: 1024px)';
-
-window.matchMedia = jest.fn().mockImplementation(query => {
-  return {
-    matches: isMatching(query),
-    media: query,
-    onchange: null,
-    addListener: jest.fn(x =>
-      x({
-        media: query,
-        matches: isMatching(query),
-      }),
-    ),
-    removeListener: jest.fn(),
-  };
-});
+generateMatchMediaMock();
 
 const mqs = ['(min-width: 400px)', '(min-width: 728px)', 'desktop'];
 const mqs2 = ['(min-width: 400px)', '(min-width: 960px)'];
@@ -31,11 +16,9 @@ describe('ReactPonsive', () => {
   afterEach(cleanup);
   test('it throws when no mqs prop is passed', () => {
     console.error = jest.fn();
-    // @ts-ignore
     const element = (
-      <ReactPonsive>
-        {props => <div data-testid="foo">{JSON.stringify(props)}</div>}
-      </ReactPonsive>
+      // @ts-ignore
+      <ReactPonsive>{() => <div />}</ReactPonsive>
     );
     expect(() => {
       render(element);
@@ -51,7 +34,7 @@ describe('ReactPonsive', () => {
   });
   test('it works', () => {
     const MyComp = ({ first, last }: ChildrenProps) => (
-      <div data-testid="foo">{`${first}${last}`}</div>
+      <div data-testid="reactponsive">{`${first}${last}`}</div>
     );
     const getElementWithMqs = (selectedMqs: Mqs) => (
       <AliasProvider
@@ -64,9 +47,11 @@ describe('ReactPonsive', () => {
     );
     const element = getElementWithMqs(mqs);
     const { container, getByTestId } = render(element);
-    expect(getByTestId('foo')).toHaveTextContent('(min-width: 400px)desktop');
+    expect(getByTestId('reactponsive')).toHaveTextContent(
+      '(min-width: 400px)desktop',
+    );
     render(getElementWithMqs(mqs2), { container });
-    expect(getByTestId('foo')).toHaveTextContent(
+    expect(getByTestId('reactponsive')).toHaveTextContent(
       '(min-width: 400px)(min-width: 400px)',
     );
   });
@@ -80,12 +65,14 @@ describe('ReactPonsive', () => {
       >
         <ReactPonsive mqs={mqs} propsMapper={propsMapper}>
           {({ first, last }) => (
-            <div data-testid="foo">{`${first}${last}`}</div>
+            <div data-testid="reactponsive">{`${first}${last}`}</div>
           )}
         </ReactPonsive>
       </AliasProvider>
     );
     const { getByTestId } = render(element);
-    expect(getByTestId('foo')).toHaveTextContent('(min-width: 400px)desktop');
+    expect(getByTestId('reactponsive')).toHaveTextContent(
+      '(min-width: 400px)desktop',
+    );
   });
 });

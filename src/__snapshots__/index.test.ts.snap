@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`index file snapshot 1`] = `
+Object {
+  "AliasProvider": [Function],
+  "ReactPonsive": [Function],
+  "ReactPonsiveToggle": [Function],
+  "ReactPonsiveValue": [Function],
+  "useReactPonsive": [Function],
+  "useReactPonsiveToggle": [Function],
+  "useReactPonsiveValue": [Function],
+  "withReactPonsive": [Function],
+  "withReactPonsiveToggle": [Function],
+}
+`;

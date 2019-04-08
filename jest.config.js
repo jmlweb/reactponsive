@@ -3,6 +3,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   testRegex: '/src/.*\\.(test|spec)?\\.(ts|tsx)$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  coverageReporters: ["json", "html"],
-  coverageDirectory: './reports/coverage'
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!**/node_modules/**'],
+  coverageReporters: ['json', 'html'],
+  coverageDirectory: './reports/coverage',
 };

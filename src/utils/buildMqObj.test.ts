@@ -1,17 +1,9 @@
 import buildMqObj from './buildMqObj';
+import { generateMatchMediaMock } from '../testUtils';
+
+generateMatchMediaMock();
 
 describe('buildMqObj', () => {
-  beforeAll(() => {
-    window.matchMedia = jest.fn().mockImplementation(query => {
-      return {
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-      };
-    });
-  });
   test('it works', () => {
     const alias = {
       mobile: '(min-width: 320px)',
@@ -33,7 +25,7 @@ describe('buildMqObj', () => {
       {
         name: 'desktop',
         value: '(min-width: 1024px)',
-        matches: false,
+        matches: true,
       },
     ]);
   });

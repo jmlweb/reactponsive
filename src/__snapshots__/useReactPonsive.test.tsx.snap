@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useReactPonsive it works 1`] = `
+NamedNodeMap {
+  "data-testid": "reactponsive",
+  "first": "(min-width: 400px)",
+  "last": "(min-width: 1024px)",
+  "matches": "[object Object]",
+  "passes": "(min-width: 400px),(min-width: 1024px)",
+}
+`;
