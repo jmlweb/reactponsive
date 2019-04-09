@@ -18,15 +18,14 @@ import { AliasProvider } from 'reactponsive';
 import MainComponent from './MainComponent';
 
 const alias = {
-  
   tablet: '(min-width: 768px)',
   desktop: '(min-width: 1024px)',
   hd: '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
 };
 const App = () => (
-	<AliasProvider alias={alias}>
-		<MainComponent />
-	</AliasProvider>
+  <AliasProvider alias={alias}>
+    <MainComponent />
+  </AliasProvider>
 );
 
 export default App;
