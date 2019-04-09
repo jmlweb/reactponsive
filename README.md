@@ -2,6 +2,20 @@
 
 > Responsive utils in all the flavors for your favorite framework
 
+[![Last Commit][last-commit-badge]][last-commit]
+[![Travis][build-badge]][build]
+[![npm package][npm-badge]][npm]
+[![Coveralls][coveralls-badge]][coveralls]
+
+[last-commit-badge]: https://img.shields.io/github/last-commit/jmlweb/reactponsive.svg
+[last-commit]: https://github.com/jmlweb/reactponsive
+[build-badge]: https://img.shields.io/travis/jmlweb/reactponsive/master.png?style=flat-square
+[build]: https://travis-ci.org/jmlweb/reactponsive
+[npm-badge]: https://img.shields.io/npm/v/reactponsive.png?style=flat-square
+[npm]: https://www.npmjs.org/package/reactponsive
+[coveralls-badge]: https://img.shields.io/coveralls/jmlweb/reactponsive/master.png?style=flat-square
+[coveralls]: https://coveralls.io/github/jmlweb/reactponsive
+
 - [AliasProvider](#aliasprovider)
 - [Hooks](#hooks)
 - [Render Props](#render-props)

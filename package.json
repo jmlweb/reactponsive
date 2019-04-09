@@ -6,6 +6,17 @@
   "types": "dist/types.tsx",
   "author": "José Manuel Lucas <josemanuel@jmlweb.es>",
   "license": "MIT",
+  "keywords": [
+    "react",
+    "responsive",
+    "reacponsive",
+    "media queries",
+    "matchmedia"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmlweb/reactponsive"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "NODE_ENV=production rollup -c",
