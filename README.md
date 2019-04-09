@@ -1,10 +1,36 @@
-# ReactPonsive ⚛️
+# ⚛️ ReactPonsive
 
 > Responsive utils in all the flavors for your favorite framework
 
+- [AliasProvider](#aliasprovider)
 - [Hooks](#hooks)
 - [Render Props](#render-props)
 - [HOC](#hoc)
+
+## AliasProvider
+
+Just wrap your app with `AliasProvider` to keep your mind sane.
+
+The value must be a valid [media query string](https://developer.mozilla.org/es/docs/CSS/Media_queries).
+
+```jsx
+import { AliasProvider } from 'reactponsive';
+import MainComponent from './MainComponent';
+
+const alias = {
+  
+  tablet: '(min-width: 768px)',
+  desktop: '(min-width: 1024px)',
+  hd: '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
+};
+const App = () => (
+	<AliasProvider alias={alias}>
+		<MainComponent />
+	</AliasProvider>
+);
+
+export default App;
+```
 
 
 ## Hooks
@@ -137,15 +163,13 @@ Only renders the children when the query string(s) match(es)
 It supports a `strict` prop. When it's true, only renders the children when all the query strings match.
 
 ```jsx
-<ReactPonsiveToggle mqs={['tablet', '(-webkit-min-device-pixel-ratio: 1.25), 
-(min-resolution: 120dpi)']}>
+<ReactPonsiveToggle mqs={['tablet', '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)']}>
 	<div>This will render when any of the query strings match</div>
 </ReactPonsiveToggle>
 ```
 
 ```jsx
-<ReactPonsiveToggle mqs={['tablet', '(-webkit-min-device-pixel-ratio: 1.25), 
-(min-resolution: 120dpi)']} strict>
+<ReactPonsiveToggle mqs={['tablet', '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)']} strict>
 	<div>This will render when all of the query strings match</div>
 </ReactPonsiveToggle>
 ```
