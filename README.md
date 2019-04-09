@@ -1,6 +1,6 @@
-# ⚛️ ReactPonsive
+# 🔫 ReactPonsive
 
-> Responsive utils in all the flavors for your favorite framework
+> Responsive utils ⚒ in all the flavors 🍕 for your favorite framework ⚛️
 
 [![Last Commit][last-commit-badge]][last-commit]
 [![Travis][build-badge]][build]
@@ -23,7 +23,7 @@
 
 ## AliasProvider
 
-Just wrap your app with `AliasProvider` to keep your mind sane.
+Just wrap your app with `AliasProvider` to keep your mind sane 😸
 
 The value must be a valid [media query string](https://developer.mozilla.org/es/docs/CSS/Media_queries).
 
@@ -106,7 +106,7 @@ const value = useReactPonsiveValue({
 }); // DesktopComponent (or the last that matches or DefaultComponent if no one matches)
 ```
 
-It has a second argument, which values are "last" or "first" (last by default)
+It returns the first one when providing "first" as the second argument.
 
 ```jsx
 import { useReactPonsiveValue } from 'reactponsive';
