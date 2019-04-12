@@ -2,10 +2,10 @@ import * as React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
-import AliasProvider from './AliasProvider';
+import AliasProvider from '../AliasProvider';
 import ReactPonsive from './ReactPonsive';
-import { ChildrenProps, Mqs } from './types';
-import { generateMatchMediaMock } from './testUtils';
+import { ChildrenProps, Mqs } from '../types';
+import { generateMatchMediaMock } from '../testUtils';
 
 generateMatchMediaMock();
 

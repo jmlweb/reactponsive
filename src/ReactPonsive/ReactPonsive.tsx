@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import withAlias from './withAlias';
-import { Alias, MqObj, ReactPonsiveProps } from './types';
-import { buildMqObj, buildReactPonsiveProps, updateMqsMatches } from './utils';
+import withAlias from '../withAlias';
+import { Alias, MqObj, ReactPonsiveProps } from '../types';
+import { buildMqObj, buildReactPonsiveProps, updateMqsMatches } from '../utils';
 
 type Props = ReactPonsiveProps & {
   alias: Alias;

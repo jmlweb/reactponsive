@@ -2,6 +2,8 @@
 
 > Responsive utils ⚒ in all the flavors 🍕 for your favorite framework ⚛️
 
+[http://jmlweb.github.io/reactponsive](http://jmlweb.github.io/reactponsive)
+
 [![Last Commit][last-commit-badge]][last-commit]
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
@@ -45,7 +47,6 @@ const App = () => (
 export default App;
 ```
 
-
 ## Hooks
 
 ### useReactPonsive
@@ -53,9 +54,13 @@ export default App;
 It receives an array representing valid query strings or alias:
 
 ```jsx
-import { useReactPonsive } from 'reactponsive'; 
+import { useReactPonsive } from 'reactponsive';
 
-const props = useReactPonsive(['tablet', '(min-width: 1024px)', '(min-width: 1280px)']);
+const props = useReactPonsive([
+  'tablet',
+  '(min-width: 1024px)',
+  '(min-width: 1280px)',
+]);
 ```
 
 It returns:
@@ -118,19 +123,18 @@ const value = useReactPonsiveValue({
 }, 'first'); // TabletComponent (or DefaultComponent if it doesn't match)
 ```
 
-
 ## Render Props
 
 ### ReactPonsive
 
 It support the following props:
 
-| Prop      | Required | Description                                                                                  |
-| --------- | -------- | -------------------------------------------------------------------------------------------- |
-| mqs       | yes      | An array representing valid query strings. i.e. `['(min-width: 300px), (min-width: 768px)']` |
-| children  | no\*     | A function receiving an object, with the properties defined below                        |
-| component | no\*     | A component receiving the props defined below.                                 |
-| propsMapper | no | A function which receives the original props object and can return a different one (i.e. for performance reasons you can omit some of them) |
+| Prop        | Required | Description                                                                                                                                 |
+| ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| mqs         | yes      | An array representing valid query strings. i.e. `['(min-width: 300px), (min-width: 768px)']`                                                |
+| children    | no\*     | A function receiving an object, with the properties defined below                                                                           |
+| component   | no\*     | A component receiving the props defined below.                                                                                              |
+| propsMapper | no       | A function which receives the original props object and can return a different one (i.e. for performance reasons you can omit some of them) |
 
 (\*) You must supply `children` or `component`
 
@@ -155,18 +159,24 @@ const MyComp = () => (
 
 ```jsx
 import { ReactPonsive } from 'reactponsive';
-// RespComp will receive the props from ReactPonsive 
+// RespComp will receive the props from ReactPonsive
 import RespComp from './RespComp';
 
 const MyComp = () => (
-  <ReactPonsive mqs={['tablet', 'desktop', '(min-width: 1280px)']} component={RespComp} />
+  <ReactPonsive
+    mqs={['tablet', 'desktop', '(min-width: 1280px)']}
+    component={RespComp}
+  />
 );
 
 export default MyComp;
 ```
 
 ```jsx
-const propsMapper = props => ({ ...props, matchesLength: props.matches.length });
+const propsMapper = props => ({
+  ...props,
+  matchesLength: props.matches.length,
+});
 ```
 
 ### ReactPonsiveToggle
@@ -176,16 +186,28 @@ Only renders the children when the query string(s) match(es)
 It supports a `strict` prop. When it's true, only renders the children when all the query strings match.
 
 ```jsx
-<ReactPonsiveToggle mqs={['tablet', '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)']}>
-	<div>This will render when any of the query strings match</div>
+<ReactPonsiveToggle
+  mqs={[
+    'tablet',
+    '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
+  ]}
+>
+  <div>This will render when any of the query strings match</div>
 </ReactPonsiveToggle>
 ```
 
 ```jsx
-<ReactPonsiveToggle mqs={['tablet', '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)']} strict>
-	<div>This will render when all of the query strings match</div>
+<ReactPonsiveToggle
+  mqs={[
+    'tablet',
+    '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
+  ]}
+  strict
+>
+  <div>This will render when all of the query strings match</div>
 </ReactPonsiveToggle>
 ```
+
 ### ReactPonsiveValue
 
 Renders the last (by default) or first value defined in an object whose keys are media strings.
@@ -222,7 +244,11 @@ HOC version of [ReactPonsive](#reactponsive).
 import { withReactPonsive } from 'reactponsive';
 import MyComponent from './MyComponent';
 
-const EnhancedComponent = withReactPonsive(['tablet', '(min-width: 1024px)', '(min-width: 1280px)'])(MyComponent);
+const EnhancedComponent = withReactPonsive([
+  'tablet',
+  '(min-width: 1024px)',
+  '(min-width: 1280px)',
+])(MyComponent);
 // Component will receive first, last, matches and passes
 ```
 
@@ -233,11 +259,15 @@ import { withReactPonsive } from 'reactponsive';
 import MyOtherComponent from './MyOtherComponent';
 import MyOtherMobileComponent from './MyOtherMobileComponent';
 
-const MyComponent = ({ passesLength }) => passesLength > 2 ? <MyOtherComponent /> : <MyOtherMobileComponent />;
+const MyComponent = ({ passesLength }) =>
+  passesLength > 2 ? <MyOtherComponent /> : <MyOtherMobileComponent />;
 
 const propsMapper = ({ passes }) => ({ passesLength: passes.length });
 
-const EnhancedComponent = withReactPonsive(['tablet', '(min-width: 1024px)', '(min-width: 1280px)'], propsMapper)(MyComponent);
+const EnhancedComponent = withReactPonsive(
+  ['tablet', '(min-width: 1024px)', '(min-width: 1280px)'],
+  propsMapper,
+)(MyComponent);
 ```
 
 ### withReactPonsiveToggle
@@ -248,13 +278,20 @@ HOC version of [ReactPonsiveToggle](#reactponsivetoggle).
 import { withReactPonsiveToggle } from 'reactponsive';
 import MyComponent from './MyComponent';
 
-const EnhancedComponent = withReactPonsiveToggle(['tablet', '(min-width: 1024px)', '(min-width: 1280px)'])(MyComponent);
+const EnhancedComponent = withReactPonsiveToggle([
+  'tablet',
+  '(min-width: 1024px)',
+  '(min-width: 1280px)',
+])(MyComponent);
 // Component will render only if any of the media query strings matches
 ```
 
 ```jsx
 import { withReactPonsiveToggle } from 'reactponsive';
 import MyComponent from './MyComponent';
-const EnhancedComponent = withReactPonsiveToggle(['tablet', '(min-width: 1024px)', '(min-width: 1280px)'], true)(MyComponent);
+const EnhancedComponent = withReactPonsiveToggle(
+  ['tablet', '(min-width: 1024px)', '(min-width: 1280px)'],
+  true,
+)(MyComponent);
 // Component will render only if all of the media query strings match
 ```

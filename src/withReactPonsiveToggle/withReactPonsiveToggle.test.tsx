@@ -3,7 +3,7 @@ import { render, cleanup } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
 import withReactPonsiveToggle from './withReactPonsiveToggle';
-import { generateMatchMediaMock } from './testUtils';
+import { generateMatchMediaMock } from '../testUtils';
 
 generateMatchMediaMock();
 
@@ -12,6 +12,7 @@ const MyComp = () => <div>foo</div>;
 const mqs = ['(min-width: 400px)', '(min-width: 768px)', '(min-width: 1024px)'];
 
 describe('withReactPonsive', () => {
+  afterEach(cleanup);
   test('it throws when no mq is passed', () => {
     console.error = jest.fn();
     expect(() => {
