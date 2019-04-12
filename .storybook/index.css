@@ -5,6 +5,7 @@ body {
 .story {
   border: 1px solid #eee;
   padding: 40px;
+  background: #fff;
 }
 
 .box {
