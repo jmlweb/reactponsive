@@ -3,7 +3,7 @@ import { render, cleanup } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
 import ReactPonsiveValue from './ReactPonsiveValue';
-import { generateMatchMediaMock } from './testUtils';
+import { generateMatchMediaMock } from '../testUtils';
 
 generateMatchMediaMock();
 

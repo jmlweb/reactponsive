@@ -3,7 +3,7 @@ import { render, cleanup } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
 import AliasProvider from './AliasProvider';
-import Context from './Context';
+import Context from '../Context';
 
 describe('AliasProvider', () => {
   afterEach(cleanup);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import Context from './Context';
-import { Alias } from './types';
+import Context from '../Context';
+import { Alias } from '../types';
 
 interface Props {
   alias: Alias;
