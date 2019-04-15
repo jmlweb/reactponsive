@@ -5,5 +5,5 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverageFrom: ['src/**/*.{ts,tsx}', '!**/node_modules/**'],
   coverageReporters: ['json', 'html', 'lcov', 'text-summary'],
-  coverageDirectory: './reports/coverage',
+  coverageDirectory: '.coverage',
 };
