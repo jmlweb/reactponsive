@@ -1,11 +1,11 @@
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-import { Mqs } from './types';
-import Context from './Context';
-import { buildMqObj, buildReactPonsiveProps, updateMqsMatches } from './utils';
+import { Mqs } from '../types';
+import { buildMqObj, buildReactPonsiveProps, updateMqsMatches } from '../utils';
+import useAlias from '../useAlias';
 
 const useReactPonsive = (mqsStringArr: Mqs) => {
-  const alias = useContext(Context);
+  const alias = useAlias();
   const buildMqObjWithAlias = buildMqObj(alias);
   const initialMqs = mqsStringArr.map(buildMqObjWithAlias);
   const [mqs, setMqs] = useState(initialMqs);

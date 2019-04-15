@@ -2,7 +2,7 @@
 
 > Responsive utils ⚒ in all the flavors 🍕 for your favorite framework ⚛️
 
-[http://jmlweb.github.io/reactponsive](http://jmlweb.github.io/reactponsive)
+Examples: [http://jmlweb.github.io/reactponsive](http://jmlweb.github.io/reactponsive)
 
 [![Last Commit][last-commit-badge]][last-commit]
 [![Travis][build-badge]][build]

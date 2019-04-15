@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import Context from './Context';
-import { extractDisplayName } from './utils';
-import { Alias } from './types';
+import Context from '../Context';
+import { extractDisplayName } from '../utils';
+import { Alias } from '../types';
 
 interface AliasProps {
   alias: Alias;

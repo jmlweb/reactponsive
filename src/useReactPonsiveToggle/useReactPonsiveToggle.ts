@@ -1,6 +1,6 @@
-import useReactPonsive from './useReactPonsive';
+import useReactPonsive from '../useReactPonsive';
 
-import { castArray } from './utils';
+import { castArray } from '../utils';
 
 const useReactPonsiveToggle = (
   mq: string | string[],

@@ -1,7 +1,7 @@
-import useReactPonsive from './useReactPonsive';
+import useReactPonsive from '../useReactPonsive';
 
-import { Mode, ValuesObj } from './types';
-import { getCleanObjKeys } from './utils';
+import { Mode, ValuesObj } from '../types';
+import { getCleanObjKeys } from '../utils';
 
 const useReactPonsiveValue = (mqsObj: ValuesObj, mode: Mode = 'last') => {
   const mqs = getCleanObjKeys(mqsObj);

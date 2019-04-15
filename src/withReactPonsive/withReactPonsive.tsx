@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import ReactPonsive from './ReactPonsive';
-import { Mqs, PropsMapper } from './types';
-import { extractDisplayName } from './utils';
+import ReactPonsive from '../ReactPonsive';
+import { Mqs, PropsMapper } from '../types';
+import { extractDisplayName } from '../utils';
 
 const withReactPonsive = (mqs: Mqs, propsMapper?: PropsMapper) => <
   OriginalProps extends {}

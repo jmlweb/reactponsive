@@ -38,6 +38,6 @@ describe('withReactPonsive', () => {
       </div>
     );
     const { getByTestId } = render(element);
-    expect(getByTestId('reactponsive')).toHaveTextContent('foo');
+    expect(getByTestId('reactponsive')).toHaveTextContent('');
   });
 });

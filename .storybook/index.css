@@ -3,9 +3,79 @@ body {
 }
 
 .story {
+  padding: 30px;
+  background: #fff;
+}
+
+.story h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.story h2 {
+  color: #7b7b7b;
+  margin-top: 0;
+}
+
+.story h3 {
+  color: #7b7b7b;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.story table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #dfdfdf;
+}
+
+.story thead {
+  background: #eee;
+}
+
+.story th,
+.story td {
+  padding: 10px 15px;
+  text-align: left;
+  border-right: 1px solid #dfdfdf;
+}
+
+.story th:last-child,
+.story td:last-child {
+  border-right: 0;
+}
+
+.story tbody tr {
+  border-top: 1px solid #dfdfdf;
+}
+
+.story .content {
   border: 1px solid #eee;
   padding: 40px;
-  background: #fff;
+  margin-bottom: 40px;
+}
+
+.story pre {
+  margin-bottom: 40px;
+}
+
+.story code {
+  display: block;
+  background: #333;
+  padding: 10px 20px 0;
+  color: #fff;
+  font-family: Consolas, monaco, monospace;
+  font-size: 15px;
+}
+
+.story code:first-child {
+  padding-top: 20px;
+}
+
+.story code:last-child {
+  padding-bottom: 20px;
 }
 
 .box {
