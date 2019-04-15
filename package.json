@@ -22,8 +22,8 @@
     "build": "NODE_ENV=production rollup -c",
     "watch": "rollup -cw",
     "prepare": "npm run build",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "jest --coverage",
+    "test:simple": "jest",
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "deploy-storybook": "storybook-to-ghpages"
