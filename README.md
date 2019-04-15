@@ -1,8 +1,6 @@
-# [🔫 ReactPonsive](http://jmlweb.github.io/reactponsive)
+# 🔫 ReactPonsive
 
 > Responsive utils ⚒ in all the flavors 🍕 for your favorite framework ⚛️
-
-Examples: [http://jmlweb.github.io/reactponsive](http://jmlweb.github.io/reactponsive)
 
 [![Last Commit][last-commit-badge]][last-commit]
 [![Travis][build-badge]][build]
@@ -17,6 +15,39 @@ Examples: [http://jmlweb.github.io/reactponsive](http://jmlweb.github.io/reactpo
 [npm]: https://www.npmjs.org/package/reactponsive
 [coveralls-badge]: https://img.shields.io/coveralls/jmlweb/reactponsive/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/jmlweb/reactponsive
+
+## Documentation
+
+[http://jmlweb.github.io/reactponsive](http://jmlweb.github.io/reactponsive)
+
+## Objetives
+
+- To provide a simple way of dealing with complex interfaces where the use of media queries in styles is not enough.
+- To receive [valid Media Query Strings](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries).
+- To work also with Alias, to avoid remembering each media query once and again.
+- To support all the flavors (Hooks, Render props and HOCs) where possible.
+- To work with native MatchMedia API.
+
+## Installation
+
+```
+npm install reactponsive
+```
+
+or
+
+```
+yarn add reactponsive
+```
+
+## Requirements
+
+- **Render props and HOCs:** React >= 16.7.0
+- **Hooks:** React >= 16.8.0 (or any older experimental version supporting hooks)
+
+---
+
+---
 
 - [AliasProvider](#aliasprovider)
 - [Hooks](#hooks)
@@ -48,6 +79,16 @@ export default App;
 ```
 
 ## Hooks
+
+### useAlias
+
+Get the alias created in AliasProvided
+
+```jsx
+import { useAlias } from 'reactponsive';
+
+const alias = useAlias();
+```
 
 ### useReactPonsive
 
@@ -124,6 +165,26 @@ const value = useReactPonsiveValue({
 ```
 
 ## Render Props
+
+### AliasConsumer
+
+Get the alias created in AliasProvided
+
+```jsx
+import { AliasConsumer } from 'reactponsive';
+
+// ...
+
+const MyComp = () => (
+  <AliasConsumer>
+    {alias => (
+      <div className="box">
+        <strong>alias:</strong> {JSON.stringify(alias, null, 2)}
+      </div>
+    )}
+  </AliasConsumer>
+);
+```
 
 ### ReactPonsive
 
@@ -235,6 +296,17 @@ It is possible to pass a `default` key, and the value will render when no media 
 ```
 
 ## HOC
+
+### withAlias
+
+Pass the alias created in AliasProvided to the wrapped component
+
+```jsx
+import { withAlias } from 'reactponsive';
+import MyComponent from './MyComponent';
+
+const MyEnhancedComponent = withAlias(MyComponent);
+```
 
 ### withReactPonsive
 
