@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "types": "dist/types.tsx",
+  "types": "dist/index.d.ts",
   "author": "José Manuel Lucas <josemanuel@jmlweb.es>",
   "license": "MIT",
   "keywords": [
