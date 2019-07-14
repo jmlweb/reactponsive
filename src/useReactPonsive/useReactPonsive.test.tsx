@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
-import 'jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect';
 
 import useReactPonsive from './useReactPonsive';
 import { generateMatchMediaMock } from '../testUtils';
