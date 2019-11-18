@@ -15,7 +15,6 @@ storiesOf('Hooks', module)
   )
   .add('useInfo', () => {
     const MyComponent2 = ({ results }) => {
-      console.log(results);
       return (
         <div className="box">
           <strong>results:</strong> {JSON.stringify(results, null, 2)}
