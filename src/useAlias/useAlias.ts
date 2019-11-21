@@ -1,9 +1,7 @@
-import { useContext } from 'react';
-
-import Context from '../Context';
+import useReactPonsiveContext from '../_lib/useReactPonsiveContext';
 
 const useAlias = () => {
-    const { alias } = useContext(Context);
+    const { alias } = useReactPonsiveContext();
     return alias;
 };
 

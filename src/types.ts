@@ -1,15 +1,16 @@
-export type Result = {
-  [key: string]: boolean;
-};
+export type Result = Record<string, boolean>;
 export type Fn = (result: Result) => void;
 
 export type Mqs = string[];
 
-export interface IAlias {
-  [key: string]: string;
+export type Aliases<T = string> = Record<string, T>;
+
+export interface HasAliases {
+  alias: Aliases,
 }
 
-export interface IContext {
-  alias: IAlias,
+export interface ReactPonsiveContext extends HasAliases {
   subscribe: (mqs: Mqs, fn: Fn) => () => void,
 }
+
+export type FirstLastMode = 'first' | 'last';

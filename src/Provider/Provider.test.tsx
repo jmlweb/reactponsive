@@ -1,11 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 
 import Provider from './Provider';
-import Context from '../Context';
+import Context from '../_lib/Context';
 
 describe('ReactPonsiveProvider', () => {
+  test('It works without passing aliases', () => {
+    const InnerComp = () => <div>InnerComponent</div>;
+    const element = (
+      <Provider>
+        <InnerComp />
+      </Provider>
+    );
+    const { getByText } = render(element);
+    expect(getByText('InnerComponent')).toBeInTheDocument();
+  });
   test('It passes alias by context', () => {
     const InnerComp = () => {
       const { alias } = useContext(Context);
@@ -30,24 +39,5 @@ describe('ReactPonsiveProvider', () => {
     expect(
       getByText('(min-width: 400px)(min-width: 768px)'),
     ).toBeInTheDocument();
-  });
-  test('It passes a subscribe function, which returns an unsubscribe function', () => {
-    const InnerComp = () => {
-      const { subscribe } = useContext(Context);
-      let result;
-      useEffect(() => {
-        if (subscribe) {
-          result = subscribe(['(min-width: 400px)'], jest.fn());
-        }
-      }, []);
-      return <div>{typeof subscribe === 'function' && 'Allright'}</div>;
-    };
-    const element = (
-      <Provider>
-        <InnerComp />
-      </Provider>
-    );
-    const { getByText } = render(element);
-    expect(getByText('Allright')).toBeInTheDocument();
   });
 });

@@ -1,34 +1,24 @@
-import React from 'react';
+import React, { Children, ReactChild } from "react";
 
-import Context from '../Context';
-import { IAlias } from '../types';
-import useSubscribe from './useSubscribe';
-import useListeners from './useListeners';
-import Subscription from '../_lib/Subscription';
-
-interface Props {
-  /** Object with alias as keys and media query string as values */
-  alias?: IAlias;
-  children: React.ReactNode;
-}
-
+import Context from "../_lib/Context";
+import { HasAliases } from "../types";
+import MatchMediaSubscriber from "../_lib/MatchMediaSubscriber";
 /**
- * Pass the alias object provided as context for later use
+ * Pass the alias object provided as context for later use, along with the subscriber
  */
+const { subscribe } = new MatchMediaSubscriber();
 
-const subscribe = Subscription();
+type Props = Partial<HasAliases> & {
+  children: ReactChild;
+};
 
-const Provider: React.FunctionComponent<Props> = ({ alias = {}, children }) => {
-  // const { subscribe, subscriptions } = useSubscribe();
-  // const results = useListeners(subscriptions);
+const Provider = ({ alias = {}, children }: Props) => {
   const value = {
     alias,
-    subscribe: subscribe,
+    subscribe
   };
   return (
-    <Context.Provider value={value}>
-      {React.Children.only(children)}
-    </Context.Provider>
+    <Context.Provider value={value}>{Children.only(children)}</Context.Provider>
   );
 };
 
