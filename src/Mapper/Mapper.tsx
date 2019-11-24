@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
-import useMapper from '../useMapper';
-import { FirstLastMode } from '../types';
+import useMapper from "../useMapper";
+import { FirstLastMode } from "../types";
 
-type Props = {
-  mqs: Record<string, ReactNode>;
+type Props<T> = {
+  mqs: Record<string, T>;
   mode?: FirstLastMode;
 };
 
-const Mapper = ({ mqs, mode }: Props) => {
+const Mapper = <T extends ReactNode>({ mqs, mode }: Props<T>): T | null => {
   const value = useMapper(mqs, mode);
   return value || null;
 };

@@ -1,6 +1,6 @@
 {
   "name": "reactponsive",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -64,7 +64,7 @@
     "typescript": "^3.7.2"
   },
   "peerDependencies": {
-    "react": ">=16.7.0"
+    "react": ">=16.8.0"
   },
   "dependencies": {},
   "resolutions": {

@@ -1,6 +1,6 @@
-import { ReactChild } from 'react';
+import { ReactChild } from "react";
 
-import useToggler from '../useToggler';
+import useToggler from "../useToggler";
 
 interface IProps<T> {
   mq: string | string[];
@@ -11,8 +11,8 @@ interface IProps<T> {
 const Toggler = <T extends ReactChild>({
   mq,
   strict = false,
-  children,
-}: IProps<T>): null | T => {
+  children
+}: IProps<T>): T | null => {
   const showChildren = useToggler(mq, strict);
   return showChildren ? children : null;
 };

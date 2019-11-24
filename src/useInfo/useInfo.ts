@@ -33,10 +33,15 @@ const useInfo = <T extends string>(mq: T | T[]) => {
     const [results, setResults] = useState<MatchesObj<string>>(() => getInitialState(parsedMqs));
 
     useEffect(() => {
-        const updateResults = (resultsObj: MatchesObj<T>) => setResults(prevResults => ({
-            ...prevResults,
-            ...resultsObj,
-        }));
+        const updateResults = (resultsObj: MatchesObj<T>) => {
+            setResults(prevResults => {
+                const newResults = ({
+                    ...prevResults,
+                    ...resultsObj,
+                });
+                return newResults;
+            });
+        };
         const unsubscribe = subscribe(parsedMqs, updateResults);
         return unsubscribe;
     }, []);

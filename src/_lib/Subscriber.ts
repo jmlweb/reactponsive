@@ -1,55 +1,38 @@
-import { Fn } from '../types';
+import Notifier, { MqFn } from './Notifier';
 
-type OnFn<T extends string> = (x: T) => any;
+export { MqFn };
 
-class Subscriber<T extends string, U extends Fn> {
+class Subscriber<T extends string>{
+    private mqsNotifiers: Map<T, Notifier<MqFn>> = new Map();
 
-    private subscriptions: Map<T, U[]>;
-    private onCreate: OnFn<T>;
-    private onRemove: OnFn<T>;
-
-    constructor(onCreate: OnFn<T>, onRemove: OnFn<T>) {
-        this.subscriptions = new Map();
-        this.onCreate = onCreate;
-        this.onRemove = onRemove;
+    static create() {
+        return new Subscriber();
     }
 
-    private getCurrentFns(key: T) {
-        return this.subscriptions.get(key) || [];
-    }
-
-    private appendFn(key: T, fn: U) {
-        if (!this.subscriptions.has(key)) {
-            this.onCreate(key);
+    private getNotifier = (mq: T) => {
+        let notifier = this.mqsNotifiers.get(mq);
+        if (!notifier) {
+            notifier = Notifier.create(mq);
         }
-        this.subscriptions.set(key, [...this.getCurrentFns(key), fn]);
+        return notifier;
     }
 
-    private removeFn(key: T, fn: U) {
-        const filteredFns = this.getCurrentFns(key).filter(currentFn => currentFn !== fn);
-        if (filteredFns.length) {
-            this.subscriptions.set(key, filteredFns);
-        } else {
-            this.subscriptions.delete(key);
-            this.onRemove(key);
+    subscribe = (mqs: T[], fn: Function) => {
+        const updateFn: MqFn = ({ media, matches }) => {
+            const changes = { [media]: matches };
+            fn(changes);
         }
-    }
-
-    subscribe(keys: T[], fn: U) {
-        keys.forEach((key) => {
-            this.appendFn(key, fn);
+        mqs.forEach(mq => {
+            this.getNotifier(mq).subscribe(updateFn);
         });
         return () => {
-            keys.forEach((key) => {
-                this.removeFn(key, fn);
+            mqs.forEach(mq => {
+                const mqNotifier = this.getNotifier(mq);
+                mqNotifier.unsubscribe(updateFn);
+                if (mqNotifier.isEmpty()) {
+                    this.mqsNotifiers.delete(mq);
+                }
             });
-        };
-    }
-
-    notifyChanges({ key, value }: { key: T, value: any }) {
-        const fns = this.subscriptions.get(key);
-        if (fns) {
-            fns.forEach(fn => fn({ [key]: value }));
         }
     }
 }
