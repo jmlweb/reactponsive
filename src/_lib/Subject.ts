@@ -23,9 +23,10 @@ class Subject<T extends Function>{
     }
 
     notify = <U>(value: U) => {
-        this.getFns().forEach((fn) => {
-            fn(value);
-        });
+        const fns = this.getFns();
+        for(let i = fns.length; i > 0; i--) {
+            fns[i - 1](value);
+        }
     }
 }
 

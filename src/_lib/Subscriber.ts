@@ -11,9 +11,11 @@ class Subscriber<T extends string>{
 
     private getNotifier = (mq: T) => {
         let notifier = this.mqsNotifiers.get(mq);
-        if (!notifier) {
-            notifier = Notifier.create(mq);
+        if (notifier) {
+            return notifier;
         }
+        notifier = Notifier.create(mq);
+        this.mqsNotifiers.set(mq, notifier);
         return notifier;
     }
 

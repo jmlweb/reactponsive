@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { renderHook, RenderHookOptions } from "@testing-library/react-hooks";
 
-import Provider from "./Provider";
+import Provider from "./components/Provider";
 import { HasAliases } from "./types";
 
 type F<MqStr> = (query: MqStr) => MediaQueryListEvent;
@@ -51,8 +51,7 @@ export const generateMatchMediaMock = <
   }));
 
   return {
-    updateBreakpoint,
-    getListeners: () => Array.from(listeners.keys())
+    updateBreakpoint
   };
 };
 

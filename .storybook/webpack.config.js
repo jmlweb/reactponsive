@@ -3,19 +3,22 @@ module.exports = ({ config }) => {
     test: /\.stories\.jsx?$/,
     loaders: [
       {
-        loader: require.resolve('@storybook/addon-storysource/loader'),
-      },
+        loader: require.resolve("@storybook/source-loader"),
+        options: {
+          parser: "typescript"
+        }
+      }
     ],
-    enforce: 'pre',
+    enforce: "pre"
   });
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
     use: [
       {
-        loader: require.resolve('awesome-typescript-loader'),
-      },
-    ],
+        loader: require.resolve("awesome-typescript-loader")
+      }
+    ]
   });
-  config.resolve.extensions.push('.ts', '.tsx');
+  config.resolve.extensions.push(".ts", ".tsx");
   return config;
 };
