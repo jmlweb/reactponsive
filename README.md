@@ -47,8 +47,6 @@ yarn add reactponsive
 
 ---
 
----
-
 - [AliasProvider](#aliasprovider)
 - [Hooks](#hooks)
 - [Render Props](#render-props)
@@ -267,3 +265,10 @@ It is possible to pass a `default` key, and the value will render when no media 
   (min-width: 1024px): <DesktopComponent />,
 }} />
 ```
+---
+
+## Breaking changes
+
+Reactponsive doesn't support HOC or render props any more. If your code depends on them, please, use an older version.
+
+---
