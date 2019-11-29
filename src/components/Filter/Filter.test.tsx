@@ -18,6 +18,20 @@ describe("Toggler", () => {
     expect(getByText("Tablet")).toBeInTheDocument();
     expect(queryByText("Desktop")).not.toBeInTheDocument();
   });
+  test("returns the default component", () => {
+    const { getByText, queryByText } = renderWithProvider(
+      <>
+        <Filter
+          mqs={{
+            default: <div>Default</div>,
+            "(min-width: 1280px)": <div>Desktop LG</div>
+          }}
+        />
+      </>
+    );
+    expect(getByText("Default")).toBeInTheDocument();
+    expect(queryByText("(min-width: 1280px)")).not.toBeInTheDocument();
+  });
   test("renders even when no option passes", () => {
     const { queryByText } = renderWithProvider(
       <>

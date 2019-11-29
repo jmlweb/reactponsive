@@ -1,8 +1,9 @@
 {
-    "prettier.singleQuote": true,
-    "prettier.trailingComma": "all",
-    "typescript.preferences.quoteStyle": "single",
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "ms-vscode.vscode-typescript-tslint-plugin"
 }

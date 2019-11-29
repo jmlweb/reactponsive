@@ -16,7 +16,9 @@
     "outDir": "compiled",
     "sourceMap": true,
     "target": "es2017",
-    "strict": true
+    "strict": true,
+    "strictPropertyInitialization": true,
+    "strictNullChecks": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

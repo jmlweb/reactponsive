@@ -11,6 +11,8 @@ import useInfo from "./useInfo";
 
 const { updateBreakpoint } = generateMatchMediaMock();
 
+jest.useFakeTimers();
+
 describe("useInfo", () => {
   test("throws if no mq passed", () => {
     // @ts-ignore
@@ -47,6 +49,7 @@ describe("useInfo", () => {
     const { result } = renderHookWithProvider(() => useInfo([TABLET, DESKTOP]));
     act(() => {
       updateBreakpoint(DESKTOP, true);
+      jest.runAllTimers();
     });
     expect(result.current).toEqual({
       first: TABLET,

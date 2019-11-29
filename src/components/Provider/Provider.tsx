@@ -1,11 +1,11 @@
 import React, { Children, ReactChild } from "react";
 
-import { Context, Subscriber } from "../../_lib";
+import { Context, MqsSubscriber } from "../../_lib";
 import { HasAliases } from "../../types";
 /**
  * Pass the alias object provided as context for later use, along with the subscriber
  */
-const { subscribe } = Subscriber.create();
+const subscribe = MqsSubscriber.createSubscribe();
 
 type Props = Partial<HasAliases> & {
   children: ReactChild;
