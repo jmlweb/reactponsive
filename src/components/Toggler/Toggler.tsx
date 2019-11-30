@@ -10,7 +10,7 @@ interface IProps<T> {
 
 const Toggler = <T extends ReactChild>({
   mq,
-  strict = false,
+  strict,
   children
 }: IProps<T>): T | null => {
   const showChildren = useToggler(mq, strict);

@@ -1,7 +1,8 @@
 import useInfo from '../useInfo';
 
-const useFilter = <T extends any, U extends Record<string, T>>(mqs: U): T[] => {
-    const { passes } = useInfo(Object.keys(mqs));
+const useFilter = (mqs: Record<string, any>): any[] => {
+    const mqsKeys = Object.keys(mqs);
+    const { passes } = useInfo(mqsKeys);
     return passes.map(key => mqs[key]);
 }
 

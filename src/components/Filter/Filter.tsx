@@ -1,16 +1,16 @@
 import React, { cloneElement, ReactElement } from "react";
 
 import { useInfo } from "../../hooks";
+import { getCleanMqsKeys } from '../../_lib';
 
 const Filter = ({ mqs }: { mqs: Record<string, ReactElement> }) => {
-  const { passes } = useInfo(Object.keys(mqs));
+  const cleanKeys = getCleanMqsKeys(mqs);
+  const { passes } = useInfo(cleanKeys);
   const initialValue: ReactElement[] = [];
-  const validValues = passes.reduce((acc, curr) => {
-    const currentElement = cloneElement(mqs[curr], { key: curr });
-    return [...acc, currentElement];
-  }, initialValue);
-  if (validValues.length > 0) {
-    return <>{validValues}</>;
+  const validElements = passes.reduce((acc, mqKey) => [...acc, cloneElement(mqs[mqKey], { key: mqKey })], initialValue);
+
+  if (validElements.length > 0) {
+    return <>{validElements}</>;
   }
   if (mqs.default) {
     return mqs.default;

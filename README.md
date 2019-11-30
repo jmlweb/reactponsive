@@ -1,11 +1,14 @@
 # 🔫 ReactPonsive
 
-> Responsive components and Hooks ⚒ for your favorite framework ⚛️
+> Responsive components and Hooks ⚒ for your favorite framework ⚛️ [http://jmlweb.github.io/reactponsive](http://jmlweb.github.io/reactponsive)
 
 [![Last Commit][last-commit-badge]][last-commit]
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
+[![Watch on GitHub][github-watch-badge]][github-watch]
+[![Star on GitHub][github-star-badge]][github-star]
+[![Tweet][twitter-badge]][twitter]
 
 [last-commit-badge]: https://img.shields.io/github/last-commit/jmlweb/reactponsive.svg
 [last-commit]: https://github.com/jmlweb/reactponsive
@@ -15,44 +18,54 @@
 [npm]: https://www.npmjs.org/package/reactponsive
 [coveralls-badge]: https://img.shields.io/coveralls/jmlweb/reactponsive/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/jmlweb/reactponsive
+[github-watch-badge]:
+  https://img.shields.io/github/watchers/jmlweb/reactponsive.svg?style=social
+[github-watch]: https://github.com/jmlweb/reactponsive/watchers
+[github-star-badge]:
+  https://img.shields.io/github/stars/jmlweb/reactponsive.svg?style=social
+[github-star]: https://github.com/jmlweb/reactponsive/stargazers
+[twitter]:
+  https://twitter.com/intent/tweet?text=Reactponsive:%20Responsive%20hooks%20and%20components%20for%20React%20⚛️:%20https%3A%2F%2Fgithub.com%2Fjmlweb%2Freactponsive
+[twitter-badge]:
+  https://img.shields.io/twitter/url/https/github.com/testing-library/dom-testing-library.svg?style=social
 
-## Documentation
+- [Principles](#Principles)
+- [Installation](#Installation)
+- [Requirements](#Requirements)
+- [API](#API)
+  - [Provider](#Provider)
+  - [useInfo](#useInfo)
+  - [useToggler](#useToggler)
+  - [useMapper](#useMapper)
+  - [useFilter](#useFilter)
+  - [Toggler](#Toggler)
+  - [Mapper](#Mapper)
+  - [Filter](#Filter)
+  - [useAlias](#useAlias)
 
-[http://jmlweb.github.io/reactponsive](http://jmlweb.github.io/reactponsive)
+## Principles
 
-## Objetives
-
-- To provide a simple way of dealing with complex interfaces **where the use of media queries in styles is not enough**.
-- To work with **native MatchMedia API**.
-- To support **[valid Media Query Strings](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)**, like dimensions, user options and more.
-- To make possible to use **"alias"**, to avoid remembering the same media queries once and again.
-- To be as **fast and optimized** as possible.
+- Intended for complex interfaces **where the use of media queries in CSS is not enough** (Displaying different headers on mobile/desktop, enhancing accesibility in your components if some flag is active, displaying charts only on desktop sizes...).
+- Works with **native MatchMedia API** and receives **[valid Media Query Strings](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)** as arguments.
+- Supports the use of **"alias"** (`{ tablet: '(min-width: 768px)' }`).
+- Is **fast** and performant, and **only updates** the connected components **when needed**.
+- Includes a **Jest mock for MatchMedia** API which supports updating the breakpoints matches.
 
 ## Installation
 
-```
+```sh
 npm install reactponsive
-```
-
-or
-
-```
+#or
 yarn add reactponsive
 ```
 
 ## Requirements
 
-- **Render props and HOCs:** React >= 16.7.0
-- **Hooks:** React >= 16.8.0 (or any older experimental version supporting hooks)
+- ReactPonsive **works only with hooks** for performance reasons, so you will need **React >= 16.8** (or any older experimental version supporting hooks)
 
----
+## API
 
-- [AliasProvider](#aliasprovider)
-- [Hooks](#hooks)
-- [Render Props](#render-props)
-- [HOC](#hoc)
-
-## Provider
+### Provider
 
 This is where all the magic take place. **You must include this component before using the rest of the components and hooks.**
 
@@ -80,8 +93,6 @@ const App = () => (
 
 export default App;
 ```
-
-## Hooks
 
 ### useInfo
 
@@ -185,18 +196,6 @@ useEffect(() => {
 
 ```
 
-### useAlias
-
-You'll rarely will need this, but it is possible to retrieve the `alias` you passed to the `Provider`
-
-```jsx
-import { useAlias } from 'reactponsive';
-
-const alias = useAlias();
-```
-
-## Components
-
 ### Toggler
 
 Only renders the children when the query string(s) match(es)
@@ -265,10 +264,17 @@ It is possible to pass a `default` key, and the value will render when no media 
   (min-width: 1024px): <DesktopComponent />,
 }} />
 ```
----
 
-## Breaking changes
+### useAlias
 
-Reactponsive doesn't support HOC or render props any more. If your code depends on them, please, use an older version.
+You'll rarely will need this, but it is possible to retrieve the `alias` you passed to the `Provider`
 
----
+```jsx
+import { useAlias } from 'reactponsive';
+
+const alias = useAlias();
+```
+
+## Author
+
+José Manuel Lucas [@jmlweb](https://twitter.com/jmlweb)

@@ -1,4 +1,4 @@
-import React, { Children, ReactChild } from "react";
+import React, { ReactChild } from "react";
 
 import { Context, MqsSubscriber } from "../../_lib";
 import { HasAliases } from "../../types";
@@ -17,7 +17,7 @@ const Provider = ({ alias = {}, children }: Props) => {
     subscribe
   };
   return (
-    <Context.Provider value={value}>{Children.only(children)}</Context.Provider>
+    <Context.Provider value={value}>{children}</Context.Provider>
   );
 };
 

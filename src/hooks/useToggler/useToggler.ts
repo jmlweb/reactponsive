@@ -1,12 +1,11 @@
 import useInfo from '../useInfo';
 
-const useToggler = (mq: string | string[], strict: Boolean = false): Boolean => {
-    const { passes } = useInfo(mq);
-
-    const passesAreEqualMqs = passes.length === (Array.isArray(mq) ? mq.length : 1);
-    const isNotStrictOrPassesAreEqualMqs = (!strict || passesAreEqualMqs)
-
-    return (passes.length > 0 && isNotStrictOrPassesAreEqualMqs);
+const useToggler = (mq: string | string[], strict: Boolean = false) => {
+  const { passes } = useInfo(mq);
+  if (!Array.isArray(mq) || strict === false) {
+    return passes.length > 0;
+  }
+  return passes.length === mq.length;
 }
 
 export default useToggler;
