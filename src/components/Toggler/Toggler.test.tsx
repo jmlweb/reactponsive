@@ -1,26 +1,26 @@
-import React from "react";
+import React from 'react';
 
-import { generateMatchMediaMock, renderWithProvider } from "../../testUtils";
+import { generateMatchMediaMock, renderWithProvider } from '../../testUtils';
 
-import Toggler from "./Toggler";
+import Toggler from './Toggler';
 
 generateMatchMediaMock();
 
-describe("Toggler", () => {
-  test("shows the component when needed", () => {
+describe('Toggler', () => {
+  test('shows the component when needed', () => {
     const { getByText } = renderWithProvider(
       <Toggler mq="tablet">
         <div>Tablet</div>
       </Toggler>
     );
-    expect(getByText("Tablet")).toBeInTheDocument();
+    expect(getByText('Tablet')).toBeInTheDocument();
   });
-  test("hides the component when needed", () => {
+  test('hides the component when needed', () => {
     const { queryByText } = renderWithProvider(
       <Toggler mq="desktop">
         <div>Desktop</div>
       </Toggler>
     );
-    expect(queryByText("Desktop")).not.toBeInTheDocument();
+    expect(queryByText('Desktop')).not.toBeInTheDocument();
   });
 });

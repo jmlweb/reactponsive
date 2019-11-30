@@ -1,7 +1,7 @@
-import React, { cloneElement, ReactElement } from "react";
+import React, { cloneElement, ReactElement } from 'react';
 
-import { useInfo } from "../../hooks";
 import { getCleanMqsKeys } from '../../_lib';
+import { useInfo } from '../../hooks';
 
 const Filter = ({ mqs }: { mqs: Record<string, ReactElement> }) => {
   const cleanKeys = getCleanMqsKeys(mqs);

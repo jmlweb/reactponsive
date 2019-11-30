@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { render } from "@testing-library/react";
+import { render } from '@testing-library/react';
+import React, { useContext } from 'react';
 
-import Provider from "./Provider";
-import { Context } from "../../_lib";
+import { Context } from '../../_lib';
+import Provider from './Provider';
 
-describe("ReactPonsiveProvider", () => {
-  test("It works without passing aliases", () => {
+describe('ReactPonsiveProvider', () => {
+  test('It works without passing aliases', () => {
     const InnerComp = () => <div>InnerComponent</div>;
     const element = (
       <Provider>
@@ -13,9 +13,9 @@ describe("ReactPonsiveProvider", () => {
       </Provider>
     );
     const { getByText } = render(element);
-    expect(getByText("InnerComponent")).toBeInTheDocument();
+    expect(getByText('InnerComponent')).toBeInTheDocument();
   });
-  test("It passes alias by context", () => {
+  test('It passes alias by context', () => {
     const InnerComp = () => {
       const { alias } = useContext(Context);
       return alias ? (
@@ -28,8 +28,8 @@ describe("ReactPonsiveProvider", () => {
     const element = (
       <Provider
         alias={{
-          sm: "(min-width: 400px)",
-          md: "(min-width: 768px)"
+          sm: '(min-width: 400px)',
+          md: '(min-width: 768px)'
         }}
       >
         <InnerComp />
@@ -37,7 +37,7 @@ describe("ReactPonsiveProvider", () => {
     );
     const { getByText } = render(element);
     expect(
-      getByText("(min-width: 400px)(min-width: 768px)")
+      getByText('(min-width: 400px)(min-width: 768px)')
     ).toBeInTheDocument();
   });
 });

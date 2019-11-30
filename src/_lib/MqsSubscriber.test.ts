@@ -1,6 +1,6 @@
-import MqsSubscriber from './MqsSubscriber';
+import { DESKTOP, generateMatchMediaMock, TABLET } from '../testUtils';
 import { MqFn } from './MqDispatcher';
-import { TABLET, DESKTOP, generateMatchMediaMock } from '../testUtils';
+import MqsSubscriber from './MqsSubscriber';
 
 const { updateBreakpoint } = generateMatchMediaMock();
 
@@ -39,5 +39,5 @@ describe('MqsSubscriber', () => {
     test('unsubscribes properly', () => {
         unsubscribe();
         unsubscribe2();
-    })
+    });
 });

@@ -1,10 +1,10 @@
-import { ReactChild } from "react";
+import { ReactChild } from 'react';
 
-import { useToggler } from "../../hooks";
+import { useToggler } from '../../hooks';
 
 interface IProps<T> {
   mq: string | string[];
-  strict?: Boolean;
+  strict?: boolean;
   children: T;
 }
 

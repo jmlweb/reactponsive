@@ -1,14 +1,14 @@
-import React from "react";
-import { render } from "@testing-library/react";
-import { renderHook, RenderHookOptions } from "@testing-library/react-hooks";
+import { render } from '@testing-library/react';
+import { renderHook, RenderHookOptions } from '@testing-library/react-hooks';
+import React from 'react';
 
-import Provider from "./components/Provider";
-import { HasAliases } from "./types";
+import Provider from './components/Provider';
+import { IHasAliases } from './types';
 
 type F<MqStr> = (query: MqStr) => MediaQueryListEvent;
 
-export const TABLET = "(min-width: 768px)";
-export const DESKTOP = "(min-width: 1024px)";
+export const TABLET = '(min-width: 768px)';
+export const DESKTOP = '(min-width: 1024px)';
 
 const defaultAlias = {
   tablet: TABLET,
@@ -17,11 +17,11 @@ const defaultAlias = {
 
 export const generateMatchMediaMock = <
   MqStr extends string,
-  Value extends Boolean
+  Value extends boolean
 >(
   initialState?: Record<MqStr, Value>
 ) => {
-  let values = new Map(
+  const values = new Map(
     Object.entries(
       initialState || {
         [TABLET]: true,
@@ -29,7 +29,7 @@ export const generateMatchMediaMock = <
       }
     )
   );
-  let listeners = new Map();
+  const listeners = new Map();
 
   const updateBreakpoint = (key: MqStr, value: Value) => {
     values.set(key, value);
@@ -57,7 +57,7 @@ export const generateMatchMediaMock = <
 
 export const renderWithProvider = (
   ui: any,
-  { alias, ...options }: Partial<HasAliases> = {
+  { alias, ...options }: Partial<IHasAliases> = {
     alias: defaultAlias
   }
 ) =>
@@ -72,7 +72,7 @@ export const renderHookWithProvider = (
   {
     alias,
     ...options
-  }: Partial<HasAliases> & {
+  }: Partial<IHasAliases> & {
     options?: RenderHookOptions<{}>;
   } = {
     alias: defaultAlias

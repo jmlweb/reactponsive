@@ -5,5 +5,5 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
-  "editor.defaultFormatter": "ms-vscode.vscode-typescript-tslint-plugin"
+  "tslint.packageManager": "yarn"
 }

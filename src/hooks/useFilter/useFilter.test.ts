@@ -1,7 +1,9 @@
+/* tslint:disable react-hooks-nesting */
+
 import {
   generateMatchMediaMock,
   renderHookWithProvider,
-} from "../../testUtils";
+} from '../../testUtils';
 
 import useFilter from './useFilter';
 
@@ -22,5 +24,5 @@ describe('useToggler', () => {
         };
         const { result } = renderHookWithProvider(() => useFilter(mqs));
         expect(result.current).toEqual([]);
-    })
-})
+    });
+});

@@ -1,15 +1,28 @@
 import MqDispatcher, { MqFn } from './MqDispatcher';
 
-class MqsSubscriber <T extends string>{
+class MqsSubscriber <T extends string> {
+
+  public static createSubscribe() {
+    return new MqsSubscriber().subscribe;
+  }
   private subscriptionsMap: Map<T, MqDispatcher> = new Map();
 
-  static createSubscribe() {
-    return new MqsSubscriber().subscribe;
+  public subscribe = (mqs: T[], fn: MqFn) => {
+    mqs.forEach((mq) => {
+      const dispatcher = this.createOrGetDispatcher(mq);
+      dispatcher!.subscribe(fn);
+    });
+
+    return () => {
+      mqs.forEach((mq) => {
+        this.subscriptionsMap.get(mq)!.unsubscribe(fn);
+      });
+    };
   }
 
   private prepareDestroy(mq: T) {
     return () => {
-      this.subscriptionsMap.delete(mq)
+      this.subscriptionsMap.delete(mq);
     };
   }
 
@@ -19,19 +32,6 @@ class MqsSubscriber <T extends string>{
       this.subscriptionsMap.set(mq, MqDispatcher.of(mq, destroy));
     }
     return this.subscriptionsMap.get(mq);
-  }
-
-  subscribe = (mqs: T[], fn: MqFn) => {
-    mqs.forEach(mq => {
-      const dispatcher = this.createOrGetDispatcher(mq);
-      dispatcher!.subscribe(fn);
-    });
-
-    return () => {
-      mqs.forEach(mq => {
-        this.subscriptionsMap.get(mq)!.unsubscribe(fn);
-      })
-    }
   }
 }
 

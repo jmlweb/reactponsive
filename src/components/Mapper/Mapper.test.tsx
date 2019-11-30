@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { generateMatchMediaMock, renderWithProvider } from "../../testUtils";
+import { generateMatchMediaMock, renderWithProvider } from '../../testUtils';
 
-import Mapper from "./Mapper";
+import Mapper from './Mapper';
 
 generateMatchMediaMock();
 
-describe("Mapper", () => {
-  test("shows the component when needed", () => {
+describe('Mapper', () => {
+  test('shows the component when needed', () => {
     const { getByText } = renderWithProvider(
       <Mapper
         mqs={{
@@ -16,9 +16,9 @@ describe("Mapper", () => {
         }}
       />
     );
-    expect(getByText("Tablet")).toBeInTheDocument();
+    expect(getByText('Tablet')).toBeInTheDocument();
   });
-  test("returns null when needed", () => {
+  test('returns null when needed', () => {
     const { queryByText } = renderWithProvider(
       <Mapper
         mqs={{
@@ -26,6 +26,6 @@ describe("Mapper", () => {
         }}
       />
     );
-    expect(queryByText("Desktop")).not.toBeInTheDocument();
+    expect(queryByText('Desktop')).not.toBeInTheDocument();
   });
 });

@@ -1,13 +1,15 @@
-import { renderHookWithProvider } from "../../testUtils";
+/* tslint:disable react-hooks-nesting */
 
-import useAlias from "./useAlias";
+import { renderHookWithProvider } from '../../testUtils';
+
+import useAlias from './useAlias';
 
 const aliasObj = {
-  tablet: "(min-width: 768px)"
+  tablet: '(min-width: 768px)'
 };
 
-describe("useAlias", () => {
-  test("Find alias passed", () => {
+describe('useAlias', () => {
+  test('Find alias passed', () => {
     const { result } = renderHookWithProvider(() => useAlias(), {
       alias: aliasObj
     });

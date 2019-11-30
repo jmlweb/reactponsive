@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
-import { ReactPonsiveContext } from '../types';
+import { IReactPonsiveContext } from '../types';
 
-const Context = createContext({} as Required<Readonly<ReactPonsiveContext>>);
+const Context = createContext({} as Required<Readonly<IReactPonsiveContext>>);
 
 export default Context;

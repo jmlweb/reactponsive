@@ -1,6 +1,6 @@
-import useInfo from '../useInfo';
-import { Modes } from '../../types';
 import { getCleanMqsKeys } from '../../_lib';
+import { Modes } from '../../types';
+import useInfo from '../useInfo';
 
 type UseMapper = <T>(mqs: Record<string, T>, mode?: Modes ) => T | null;
 
@@ -12,6 +12,6 @@ const useMapper: UseMapper = (mqs, mode = 'last') => {
     return mqs[selectedMq];
   }
   return mqs.default || null;
-}
+};
 
 export default useMapper;

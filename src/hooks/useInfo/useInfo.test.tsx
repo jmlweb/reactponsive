@@ -1,31 +1,46 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+/* tslint:disable react-hooks-nesting */
+
+import { act, renderHook } from '@testing-library/react-hooks';
 
 import {
+  DESKTOP,
   generateMatchMediaMock,
   renderHookWithProvider,
-  TABLET,
-  DESKTOP
-} from "../../testUtils";
+  TABLET
+} from '../../testUtils';
 
-import useInfo from "./useInfo";
+import useInfo from './useInfo';
 
 const { updateBreakpoint } = generateMatchMediaMock();
 
 jest.useFakeTimers();
 
-describe("useInfo", () => {
-  test("throws if no mq passed", () => {
+describe('useInfo', () => {
+  test('throws if no mq passed', () => {
     // @ts-ignore
     const { result } = renderHook(() => useInfo());
-    expect(result.error).toBe(
-      "You need to provide a media query string or an array of media query strings"
+    expect(result.error).toEqual(
+      Error(
+        'You need to provide a media query string or an array of media query strings'
+      )
     );
   });
-  test("throws if it is not wrapper with a provider", () => {
-    const { result } = renderHook(() => useInfo(["(min-width: 400px)"]));
-    expect(result.error).toBe("You need to wrap your code inside the Provider");
+  test('throws if at least one element is not a string', () => {
+    // @ts-ignore
+    const { result } = renderHook(() => useInfo(['(min-width: 768px)', 34, false]));
+    expect(result.error).toEqual(
+      Error(
+        'One or more of the media query strings received is not a valid strings'
+      )
+    );
   });
-  test("it works without alias", () => {
+  test('throws if it is not wrapper with a provider', () => {
+    const { result } = renderHook(() => useInfo(['(min-width: 400px)']));
+    expect(result.error).toEqual(
+      Error('You need to wrap your code inside the Provider')
+    );
+  });
+  test('it works without alias', () => {
     const { result } = renderHookWithProvider(() => useInfo([TABLET, DESKTOP]));
     expect(result.current).toEqual({
       first: TABLET,
@@ -34,18 +49,18 @@ describe("useInfo", () => {
       passes: [TABLET]
     });
   });
-  test("it works wit alias", () => {
+  test('it works wit alias', () => {
     const { result } = renderHookWithProvider(() =>
-      useInfo(["tablet", "desktop"])
+      useInfo(['tablet', 'desktop'])
     );
     expect(result.current).toEqual({
-      first: "tablet",
-      last: "tablet",
+      first: 'tablet',
+      last: 'tablet',
       matches: { desktop: false, tablet: true },
-      passes: ["tablet"]
+      passes: ['tablet']
     });
   });
-  test("Updates info when listener calls", () => {
+  test('Updates info when listener calls', () => {
     const { result } = renderHookWithProvider(() => useInfo([TABLET, DESKTOP]));
     act(() => {
       updateBreakpoint(DESKTOP, true);
