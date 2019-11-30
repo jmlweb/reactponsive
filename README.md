@@ -1,11 +1,14 @@
 # 🔫 ReactPonsive
 
-> Responsive utils ⚒ in all the flavors 🍕 for your favorite framework ⚛️
+> Responsive components and Hooks ⚒ for your favorite framework ⚛️ [http://jmlweb.github.io/reactponsive](http://jmlweb.github.io/reactponsive)
 
 [![Last Commit][last-commit-badge]][last-commit]
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
+[![Watch on GitHub][github-watch-badge]][github-watch]
+[![Star on GitHub][github-star-badge]][github-star]
+[![Tweet][twitter-badge]][twitter]
 
 [last-commit-badge]: https://img.shields.io/github/last-commit/jmlweb/reactponsive.svg
 [last-commit]: https://github.com/jmlweb/reactponsive
@@ -15,87 +18,88 @@
 [npm]: https://www.npmjs.org/package/reactponsive
 [coveralls-badge]: https://img.shields.io/coveralls/jmlweb/reactponsive/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/jmlweb/reactponsive
+[github-watch-badge]:
+  https://img.shields.io/github/watchers/jmlweb/reactponsive.svg?style=social
+[github-watch]: https://github.com/jmlweb/reactponsive/watchers
+[github-star-badge]:
+  https://img.shields.io/github/stars/jmlweb/reactponsive.svg?style=social
+[github-star]: https://github.com/jmlweb/reactponsive/stargazers
+[twitter]:
+  https://twitter.com/intent/tweet?text=Reactponsive:%20Responsive%20hooks%20and%20components%20for%20React%20⚛️:%20https%3A%2F%2Fgithub.com%2Fjmlweb%2Freactponsive
+[twitter-badge]:
+  https://img.shields.io/twitter/url/https/github.com/testing-library/dom-testing-library.svg?style=social
 
-## Documentation
+- [Principles](#Principles)
+- [Installation](#Installation)
+- [Requirements](#Requirements)
+- [API](#API)
+  - [Provider](#Provider)
+  - [useInfo](#useInfo)
+  - [useToggler](#useToggler)
+  - [useMapper](#useMapper)
+  - [useFilter](#useFilter)
+  - [Toggler](#Toggler)
+  - [Mapper](#Mapper)
+  - [Filter](#Filter)
+  - [useAlias](#useAlias)
 
-[http://jmlweb.github.io/reactponsive](http://jmlweb.github.io/reactponsive)
+## Principles
 
-## Objetives
-
-- To provide a simple way of dealing with complex interfaces where the use of media queries in styles is not enough.
-- To receive [valid Media Query Strings](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries).
-- To work also with Alias, to avoid remembering each media query once and again.
-- To support all the flavors (Hooks, Render props and HOCs) where possible.
-- To work with native MatchMedia API.
+- Intended for complex interfaces **where the use of media queries in CSS is not enough** (Displaying different headers on mobile/desktop, enhancing accesibility in your components if some flag is active, displaying charts only on desktop sizes...).
+- Works with **native MatchMedia API** and receives **[valid Media Query Strings](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)** as arguments.
+- Supports the use of **"alias"** (`{ tablet: '(min-width: 768px)' }`).
+- Is **fast** and performant, and **only updates** the connected components **when needed**.
+- Includes a **Jest mock for MatchMedia** API which supports updating the breakpoints matches.
 
 ## Installation
 
-```
+```sh
 npm install reactponsive
-```
-
-or
-
-```
+#or
 yarn add reactponsive
 ```
 
 ## Requirements
 
-- **Render props and HOCs:** React >= 16.7.0
-- **Hooks:** React >= 16.8.0 (or any older experimental version supporting hooks)
+- ReactPonsive **works only with hooks** for performance reasons, so you will need **React >= 16.8** (or any older experimental version supporting hooks)
 
----
+## API
 
----
+### Provider
 
-- [AliasProvider](#aliasprovider)
-- [Hooks](#hooks)
-- [Render Props](#render-props)
-- [HOC](#hoc)
+This is where all the magic take place. **You must include this component before using the rest of the components and hooks.**
 
-## AliasProvider
+The use of `alias` is supported with the same property to keep your mind sane 😸.
 
-Just wrap your app with `AliasProvider` to keep your mind sane 😸
-
-The value must be a valid [media query string](https://developer.mozilla.org/es/docs/CSS/Media_queries).
+This property is an object, where each key refers to the alias name, and the value to a valid [media query string](https://developer.mozilla.org/es/docs/CSS/Media_queries).
 
 ```jsx
-import { AliasProvider } from 'reactponsive';
-import MainComponent from './MainComponent';
+import { Provider } from 'reactponsive';
+import MyAppComponent from './MyAppComponent';
 
 const alias = {
   tablet: '(min-width: 768px)',
   desktop: '(min-width: 1024px)',
   hd: '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
+  darkMode: '(prefers-color-scheme: dark)',
+  supportsHover: '(hover: hover)',
+  noMotion: '(prefers-reduced-motion: reduce)',
 };
 const App = () => (
   <AliasProvider alias={alias}>
-    <MainComponent />
+    <MyAppComponent />
   </AliasProvider>
 );
 
 export default App;
 ```
 
-## Hooks
+### useInfo
 
-### useAlias
-
-Get the alias created in AliasProvided
+It receives an array representing valid query strings or alias, and returns useful info about them:
 
 ```jsx
-import { useAlias } from 'reactponsive';
-
-const alias = useAlias();
-```
-
-### useReactPonsive
-
-It receives an array representing valid query strings or alias:
-
-```jsx
-import { useReactPonsive } from 'reactponsive';
+import { useInfo } from 'reactponsive';
 
 const props = useReactPonsive([
   'tablet',
@@ -124,28 +128,32 @@ It returns:
 }
 ```
 
-### useReactPonsiveToggle
+### useToggler
+
+It receives a valid query string or alias, or an array of them. It returns true if **any** of the media queries matches.
+
+You can enable "strict mode" with a second boolean argument. Then, it returns true if **all** of the media queries match.
 
 ```
 (string | string[], boolean?) => boolean;
 ```
 
 ```jsx
-import { useReactPonsiveToggle } from 'reactponsive';
+import { useToggler } from 'reactponsive';
 
-const value1 = useReactPonsiveToggle('tablet'); // true if matches
-const value2 = useReactPonsiveToggle(['tablet', 'desktop']); // true if any match
-const value3 = useReactPonsiveToggle(['tablet', 'desktop'], true); // true if both match
+const value1 = useToggler('tablet'); // true if matches
+const value2 = useToggler(['tablet', 'desktop']); // true if any match
+const value3 = useToggler(['tablet', 'desktop'], true); // true if both match
 ```
 
-### useReactPonsiveValue
+### useMapper
 
 It receives an object with the media query strings as keys and returns the value corresponding to the last one that matches.
 
 ```jsx
-import { useReactPonsiveValue } from 'reactponsive';
+import { useMapper } from 'reactponsive';
 
-const value = useReactPonsiveValue({
+const component = useMapper({
   default: DefaultComponent,
   tablet: TabletComponent,
   (min-width: 1024px): DesktopComponent,
@@ -155,110 +163,58 @@ const value = useReactPonsiveValue({
 It returns the first one when providing "first" as the second argument.
 
 ```jsx
-import { useReactPonsiveValue } from 'reactponsive';
+import { useMapper } from 'reactponsive';
 
-const value = useReactPonsiveValue({
+const value = useMapper({
   default: DefaultComponent,
   tablet: TabletComponent,
   (min-width: 1024px): DesktopComponent,
 }, 'first'); // TabletComponent (or DefaultComponent if it doesn't match)
 ```
 
-## Render Props
+### useFilter
 
-### AliasConsumer
-
-Get the alias created in AliasProvided
+It receives an object with the media query strings as keys and returns an array with all the values that match.
 
 ```jsx
-import { AliasConsumer } from 'reactponsive';
+import { useFilter } from 'reactponsive';
 
-// ...
-
-const MyComp = () => (
-  <AliasConsumer>
-    {alias => (
-      <div className="box">
-        <strong>alias:</strong> {JSON.stringify(alias, null, 2)}
-      </div>
-    )}
-  </AliasConsumer>
-);
-```
-
-### ReactPonsive
-
-It support the following props:
-
-| Prop        | Required | Description                                                                                                                                 |
-| ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| mqs         | yes      | An array representing valid query strings. i.e. `['(min-width: 300px), (min-width: 768px)']`                                                |
-| children    | no\*     | A function receiving an object, with the properties defined below                                                                           |
-| component   | no\*     | A component receiving the props defined below.                                                                                              |
-| propsMapper | no       | A function which receives the original props object and can return a different one (i.e. for performance reasons you can omit some of them) |
-
-(\*) You must supply `children` or `component`
-
-The props passed are:
-
-- **first**: The first matching query string or alias or `undefined`.
-- **last**: The last matching query string or alias or `undefined`.
-- **matches**: An object, having the query strings or aliases as properties, and the results of the match as values.
-- **passes**: An array containing only the matching query strings or aliases.
-
-```jsx
-import { ReactPonsive } from 'reactponsive';
-
-const MyComp = () => (
-  <ReactPonsive mqs={['tablet', 'desktop', '(min-width: 1280px)']}>
-    {({ first, last, matches, passes }) => {
-      // do whatever with the props
-    })}
-  </ReactPonsive>
-);
-```
-
-```jsx
-import { ReactPonsive } from 'reactponsive';
-// RespComp will receive the props from ReactPonsive
-import RespComp from './RespComp';
-
-const MyComp = () => (
-  <ReactPonsive
-    mqs={['tablet', 'desktop', '(min-width: 1280px)']}
-    component={RespComp}
-  />
-);
-
-export default MyComp;
-```
-
-```jsx
-const propsMapper = props => ({
-  ...props,
-  matchesLength: props.matches.length,
+const modulesToStart = useFilter({
+  darkMode: darkModeModule,
+  supportsHover: hoverModule,
 });
+
+useEffect(() => {
+  // let's suppose we want to dispatch the start action of each module
+// when the media query matches and the module hasn't been started yet
+  modulesToStart.forEach((module) => {
+    if (!module.started) {
+      module.start()
+    }
+  });
+}, [modulesToStart]);
+
 ```
 
-### ReactPonsiveToggle
+### Toggler
 
 Only renders the children when the query string(s) match(es)
 
 It supports a `strict` prop. When it's true, only renders the children when all the query strings match.
 
 ```jsx
-<ReactPonsiveToggle
+<Toggler
   mqs={[
     'tablet',
     '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
   ]}
 >
   <div>This will render when any of the query strings match</div>
-</ReactPonsiveToggle>
+</Toggler>
 ```
 
 ```jsx
-<ReactPonsiveToggle
+<Toggler
   mqs={[
     'tablet',
     '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
@@ -266,104 +222,59 @@ It supports a `strict` prop. When it's true, only renders the children when all 
   strict
 >
   <div>This will render when all of the query strings match</div>
-</ReactPonsiveToggle>
+</Toggler>
 ```
 
-### ReactPonsiveValue
+### Mapper
 
 Renders the last (by default) or first value defined in an object whose keys are media strings.
 
-It is possible to pass a `default` key, and the value will render when no media query string is matched.
+It is possible to pass a `default` key, and the value will render when no media query string match.
 
 ```jsx
-<ReactPonsiveValue mqs={{
+<Mapper mqs={{
   default: <DefaultComponent />,
   tablet: <TabletComponent />,
   (min-width: 1024px): <DesktopComponent />,
 }}>
   <div>DesktopComponent or TabletComponent (the last which matches) or DefaultComponent if no one matches.</div>
-</ReactPonsiveValue>
+</Mapper>
 ```
 
 ```jsx
-<ReactPonsiveValue mqs={{
+<Mapper mqs={{
   default: <DefaultComponent />,
   tablet: <TabletComponent />,
   (min-width: 1024px): <DesktopComponent />,
 }} mode="first">
   <div>Tablet Component if matches, or DefaultComponent if not.</div>
-</ReactPonsiveValue>
+</Mapper>
 ```
 
-## HOC
+### Filter
 
-### withAlias
+Renders all the matching elements defined in an object whose keys are media strings.
 
-Pass the alias created in AliasProvided to the wrapped component
+It is possible to pass a `default` key, and the value will render when no media query string match.
 
 ```jsx
-import { withAlias } from 'reactponsive';
-import MyComponent from './MyComponent';
-
-const MyEnhancedComponent = withAlias(MyComponent);
+<Filter mqs={{
+  default: <DefaultComponent />,
+  tablet: <TabletComponent />,
+  (min-width: 1024px): <DesktopComponent />,
+}} />
 ```
 
-### withReactPonsive
+### useAlias
 
-HOC version of [ReactPonsive](#reactponsive).
+You'll rarely will need this, but it is possible to retrieve the `alias` you passed to the `Provider`
 
 ```jsx
-import { withReactPonsive } from 'reactponsive';
-import MyComponent from './MyComponent';
+import { useAlias } from 'reactponsive';
 
-const EnhancedComponent = withReactPonsive([
-  'tablet',
-  '(min-width: 1024px)',
-  '(min-width: 1280px)',
-])(MyComponent);
-// Component will receive first, last, matches and passes
+const alias = useAlias();
 ```
 
-You can provide the propsMapper as second argument
+## Author
 
-```jsx
-import { withReactPonsive } from 'reactponsive';
-import MyOtherComponent from './MyOtherComponent';
-import MyOtherMobileComponent from './MyOtherMobileComponent';
-
-const MyComponent = ({ passesLength }) =>
-  passesLength > 2 ? <MyOtherComponent /> : <MyOtherMobileComponent />;
-
-const propsMapper = ({ passes }) => ({ passesLength: passes.length });
-
-const EnhancedComponent = withReactPonsive(
-  ['tablet', '(min-width: 1024px)', '(min-width: 1280px)'],
-  propsMapper,
-)(MyComponent);
-```
-
-### withReactPonsiveToggle
-
-HOC version of [ReactPonsiveToggle](#reactponsivetoggle).
-
-```jsx
-import { withReactPonsiveToggle } from 'reactponsive';
-import MyComponent from './MyComponent';
-
-const EnhancedComponent = withReactPonsiveToggle([
-  'tablet',
-  '(min-width: 1024px)',
-  '(min-width: 1280px)',
-])(MyComponent);
-// Component will render only if any of the media query strings matches
-```
-
-```jsx
-import { withReactPonsiveToggle } from 'reactponsive';
-import MyComponent from './MyComponent';
-const EnhancedComponent = withReactPonsiveToggle(
-  ['tablet', '(min-width: 1024px)', '(min-width: 1280px)'],
-  true,
-)(MyComponent);
-// Component will render only if all of the media query strings match
-```
+José Manuel Lucas [@jmlweb](https://twitter.com/jmlweb)

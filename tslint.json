@@ -1,16 +1,24 @@
 {
   "defaultSeverity": "error",
   "extends": [
+    "tslint-config-prettier",
     "tslint:recommended",
     "tslint-react",
-    "tslint-react-hooks",
-    "tslint-config-prettier"
+    "tslint-react-hooks"
   ],
   "jsRules": {},
   "rules": {
-    "quotemark": [true, "single", "avoid-escape", "avoid-template"],
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape",
+      "avoid-template",
+      "jsx-double"
+    ],
     "trailing-comma": true,
-    "react-hooks-nesting": "error"
+    "react-hooks-nesting": "error",
+    "object-literal-sort-keys": false,
+    "jsx-no-multiline-js": false
   },
   "rulesDirectory": []
 }
