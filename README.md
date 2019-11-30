@@ -6,6 +6,7 @@
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/jmlweb/reactponsive.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/jmlweb/reactponsive/context:javascript)
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
 [![Tweet][twitter-badge]][twitter]
