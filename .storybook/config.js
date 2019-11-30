@@ -1,17 +1,17 @@
-import { addParameters, configure } from '@storybook/react';
+import { addParameters, configure } from "@storybook/react";
 
-import theme from './theme';
-import './index.css';
+import theme from "./theme";
+import "./index.css";
 
 addParameters({
   options: {
     showPanel: true,
-    theme,
-  },
+    theme
+  }
 });
 
 // automatically import all files ending in *.stories.js
-const req = require.context('../src', true, /.stories.js$/);
+const req = require.context("../src", true, /.stories.js$/);
 function loadStories() {
   req.keys().forEach(filename => req(filename));
 }
