@@ -1,15 +1,16 @@
 sudo: false
-
 language: node_js
 node_js:
-  - 8
-
-before_install:
-  - npm install coveralls
-
-after_success:
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-
+- '8'
 branches:
   only:
-    - master
+  - master
+cache:
+  directories:
+  - node_modules
+before_install:
+- npm update
+install:
+- npm install
+script:
+- npm run coveralls
