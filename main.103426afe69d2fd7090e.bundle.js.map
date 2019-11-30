@@ -1,0 +1,1 @@
+{"version":3,"file":"main.103426afe69d2fd7090e.bundle.js","sources":["webpack:///./src/hooks/useAlias/useAlias.ts"],"sourcesContent":["import { useReactPonsiveContext } from '../../_lib';\n\nconst useAlias = () => {\n    const { alias } = useReactPonsiveContext();\n    return alias;\n};\n\nexport default useAlias;\n"],"mappings":"AAAA","sourceRoot":""}
