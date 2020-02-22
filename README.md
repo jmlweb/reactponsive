@@ -19,16 +19,12 @@
 [npm]: https://www.npmjs.org/package/reactponsive
 [coveralls-badge]: https://img.shields.io/coveralls/jmlweb/reactponsive/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/jmlweb/reactponsive
-[github-watch-badge]:
-  https://img.shields.io/github/watchers/jmlweb/reactponsive.svg?style=social
+[github-watch-badge]: https://img.shields.io/github/watchers/jmlweb/reactponsive.svg?style=social
 [github-watch]: https://github.com/jmlweb/reactponsive/watchers
-[github-star-badge]:
-  https://img.shields.io/github/stars/jmlweb/reactponsive.svg?style=social
+[github-star-badge]: https://img.shields.io/github/stars/jmlweb/reactponsive.svg?style=social
 [github-star]: https://github.com/jmlweb/reactponsive/stargazers
-[twitter]:
-  https://twitter.com/intent/tweet?text=Reactponsive:%20Responsive%20hooks%20and%20components%20for%20React%20⚛️:%20https%3A%2F%2Fgithub.com%2Fjmlweb%2Freactponsive
-[twitter-badge]:
-  https://img.shields.io/twitter/url/https/github.com/testing-library/dom-testing-library.svg?style=social
+[twitter]: https://twitter.com/intent/tweet?text=Reactponsive:%20Responsive%20hooks%20and%20components%20for%20React%20⚛️:%20https%3A%2F%2Fgithub.com%2Fjmlweb%2Freactponsive
+[twitter-badge]: https://img.shields.io/twitter/url/https/github.com/testing-library/dom-testing-library.svg?style=social
 
 - [Principles](#Principles)
 - [Installation](#Installation)
@@ -63,6 +59,7 @@ yarn add reactponsive
 ## Requirements
 
 - ReactPonsive **works only with hooks** for performance reasons, so you will need **React >= 16.8** (or any older experimental version supporting hooks)
+- You will also need **@testing-library/react-hooks** and **react-test-renderer**
 
 ## API
 
@@ -75,16 +72,16 @@ The use of `alias` is supported with the same property to keep your mind sane �
 This property is an object, where each key refers to the alias name, and the value to a valid [media query string](https://developer.mozilla.org/es/docs/CSS/Media_queries).
 
 ```jsx
-import { Provider } from 'reactponsive';
-import MyAppComponent from './MyAppComponent';
+import { Provider } from "reactponsive";
+import MyAppComponent from "./MyAppComponent";
 
 const alias = {
-  tablet: '(min-width: 768px)',
-  desktop: '(min-width: 1024px)',
-  hd: '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
-  darkMode: '(prefers-color-scheme: dark)',
-  supportsHover: '(hover: hover)',
-  noMotion: '(prefers-reduced-motion: reduce)',
+  tablet: "(min-width: 768px)",
+  desktop: "(min-width: 1024px)",
+  hd: "(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)",
+  darkMode: "(prefers-color-scheme: dark)",
+  supportsHover: "(hover: hover)",
+  noMotion: "(prefers-reduced-motion: reduce)"
 };
 const App = () => (
   <AliasProvider alias={alias}>
@@ -100,12 +97,12 @@ export default App;
 It receives an array representing valid query strings or alias, and returns useful info about them:
 
 ```jsx
-import { useInfo } from 'reactponsive';
+import { useInfo } from "reactponsive";
 
 const props = useReactPonsive([
-  'tablet',
-  '(min-width: 1024px)',
-  '(min-width: 1280px)',
+  "tablet",
+  "(min-width: 1024px)",
+  "(min-width: 1280px)"
 ]);
 ```
 
@@ -140,11 +137,11 @@ You can enable "strict mode" with a second boolean argument. Then, it returns tr
 ```
 
 ```jsx
-import { useToggler } from 'reactponsive';
+import { useToggler } from "reactponsive";
 
-const value1 = useToggler('tablet'); // true if matches
-const value2 = useToggler(['tablet', 'desktop']); // true if any match
-const value3 = useToggler(['tablet', 'desktop'], true); // true if both match
+const value1 = useToggler("tablet"); // true if matches
+const value2 = useToggler(["tablet", "desktop"]); // true if any match
+const value3 = useToggler(["tablet", "desktop"], true); // true if both match
 ```
 
 ### useMapper
@@ -178,23 +175,22 @@ const value = useMapper({
 It receives an object with the media query strings as keys and returns an array with all the values that match.
 
 ```jsx
-import { useFilter } from 'reactponsive';
+import { useFilter } from "reactponsive";
 
 const modulesToStart = useFilter({
   darkMode: darkModeModule,
-  supportsHover: hoverModule,
+  supportsHover: hoverModule
 });
 
 useEffect(() => {
   // let's suppose we want to dispatch the start action of each module
-// when the media query matches and the module hasn't been started yet
-  modulesToStart.forEach((module) => {
+  // when the media query matches and the module hasn't been started yet
+  modulesToStart.forEach(module => {
     if (!module.started) {
-      module.start()
+      module.start();
     }
   });
 }, [modulesToStart]);
-
 ```
 
 ### Toggler
@@ -206,8 +202,8 @@ It supports a `strict` prop. When it's true, only renders the children when all 
 ```jsx
 <Toggler
   mqs={[
-    'tablet',
-    '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
+    "tablet",
+    "(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
   ]}
 >
   <div>This will render when any of the query strings match</div>
@@ -217,8 +213,8 @@ It supports a `strict` prop. When it's true, only renders the children when all 
 ```jsx
 <Toggler
   mqs={[
-    'tablet',
-    '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
+    "tablet",
+    "(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
   ]}
   strict
 >
@@ -271,7 +267,7 @@ It is possible to pass a `default` key, and the value will render when no media 
 You'll rarely will need this, but it is possible to retrieve the `alias` you passed to the `Provider`
 
 ```jsx
-import { useAlias } from 'reactponsive';
+import { useAlias } from "reactponsive";
 
 const alias = useAlias();
 ```
