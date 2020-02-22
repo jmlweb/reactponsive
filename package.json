@@ -70,7 +70,9 @@
     "typescript": "^3.7.2"
   },
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=16.8.0",
+    "@testing-library/react-hooks": ">=3",
+    "react-test-renderer": ">=16.8"
   },
   "dependencies": {},
   "resolutions": {
