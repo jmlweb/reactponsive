@@ -33,7 +33,7 @@
   "devDependencies": {
     "@storybook/addon-storysource": "^5.3.17",
     "@storybook/addon-viewport": "^5.3.17",
-    "@storybook/react": "^5.3.17",
+    "@storybook/react": "^8.5.3",
     "@storybook/storybook-deployer": "^2.8.3",
     "@testing-library/jest-dom": "^5.3.0",
     "@testing-library/react": "^9.5.0",
